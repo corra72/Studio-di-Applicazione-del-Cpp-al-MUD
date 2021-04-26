@@ -4,3 +4,7 @@
 CMudHandler::CMudHandler()
 {
 }
+
+CMudHandler::~CMudHandler()
+{
+}

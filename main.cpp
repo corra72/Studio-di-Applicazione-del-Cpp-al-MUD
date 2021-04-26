@@ -8,7 +8,7 @@
 #include "CEquipment.h"
 #include "CCharacter.h"
 #include "CPlayer.h"
-#include "MudHandler.h"
+#include "CMudHandler.h"
 
 int main()
 {

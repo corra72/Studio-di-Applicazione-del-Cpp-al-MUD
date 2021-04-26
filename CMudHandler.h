@@ -26,6 +26,8 @@ using namespace std;
 */
 
 class CMudHandler : public thread {
-
+	
+	CMudHandler();
+	~CMudHandler();
 
 };
