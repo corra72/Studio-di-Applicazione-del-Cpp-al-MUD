@@ -50,9 +50,9 @@ public:
 * Devo ancora pensare come sviluppare bene il concetto, quindi non odiarmi :p
 */
 
-extern class CEquipment;
-extern class CCharacter;
-extern class CRoom;
+class CEquipment;
+class CCharacter;
+class CRoom;
 
 class CTargettable {
 protected:
