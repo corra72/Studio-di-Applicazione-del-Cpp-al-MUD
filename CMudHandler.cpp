@@ -45,7 +45,7 @@ void CMudHandler::onConnectionError(CPlayer* connection, SocketResult result)
 *
 */
 
-void CMudHandler::onDisconnect(CPlayer* connection)
+void CMudHandler::onDisconnect(CPlayer* connection) 
 {
 	ConnectedPlayers.remove(connection);
 	// Non sono sicuro che questo delete sia necessario, sarebbe da fare qualche test

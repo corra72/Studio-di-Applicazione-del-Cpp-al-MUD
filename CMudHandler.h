@@ -48,8 +48,8 @@ public:
 	int run();
 
 	// Ereditato tramite CConnectionHandler
-	virtual void onDisconnect(CPlayer* connection);
+	virtual void onConnectionError(CPlayer* connection, SocketResult result) override;
 
 	// Ereditato tramite CConnectionHandler
-	virtual void onConnectionError(CPlayer* connection, SocketResult result) override;
+	virtual void onDisconnect(CPlayer* connection) override;
 };
