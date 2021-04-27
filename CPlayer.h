@@ -47,6 +47,5 @@ public:
     {
         return SocketResult::R_DISCONNECTED;
     }
-
 };
 

@@ -5,6 +5,7 @@
 #include "CRoom.h"
 #include "CEquipment.h"
 #include "CCharacter.h"
+
 #include "CPlayer.h"
 #include "Networking.h"
 
@@ -27,6 +28,7 @@ using namespace std;
 * hai gli oggetti reali che vengono caricati da quei prototipi.
 * 
 */
+
 
 /*
 * public CConnectionHandler

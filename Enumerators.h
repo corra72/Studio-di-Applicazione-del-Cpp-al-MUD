@@ -1,5 +1,6 @@
 #pragma once
 
+
 enum class ConnectionState {
     CONN_CONNECTING,       // primo stato, quando invia la schermata iniziale e chiede lo UserID
     CONN_VERIFY,        // secondo stato, quando richiede la password

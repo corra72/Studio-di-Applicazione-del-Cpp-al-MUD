@@ -1,3 +1,4 @@
+
 #include <string>
 #include "CMudHandler.h"
 
@@ -7,7 +8,6 @@ CMudHandler::CMudHandler(string configFile)
 }
 
 CMudHandler::~CMudHandler()
-{
 	while (!ConnectedPlayers.empty()) {
 		CPlayer* item = ConnectedPlayers.front();
 		item->disconnect();
@@ -52,5 +52,7 @@ void CMudHandler::onDisconnect(CPlayer* connection)
 void CMudHandler::onConnectionError(CPlayer* connection, SocketResult result)
 {
 }
+
+
 
 

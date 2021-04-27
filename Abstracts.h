@@ -44,6 +44,7 @@ public:
 
 
 /*
+
 * Forward declaration di un po' di classi; Purtroppo in questo momento è necessario averle
 * perché le classi fanno riferimento le une alle altre; dopo vedo se esistono soluzioni più
 * eleganti
