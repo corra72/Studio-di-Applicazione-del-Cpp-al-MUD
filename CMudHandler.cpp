@@ -7,7 +7,7 @@ CMudHandler::CMudHandler(string configFile)
 	ConnectedPlayers = list<CPlayer *>();
 }
 
-CMudHandler::~CMudHandler()
+CMudHandler::~CMudHandler() {
 	while (!ConnectedPlayers.empty()) {
 		CPlayer* item = ConnectedPlayers.front();
 		item->disconnect();
@@ -22,8 +22,7 @@ CMudHandler::~CMudHandler()
 */
 
 
-int CMudHandler::run()
-{
+int CMudHandler::run() {
 	/* to do... gestisce il thread principale dell'applicazione. In questo caso si 
 	* limita ad uscire subito, ma in realtà dovrebbe esserci un ciclo while(true) da cui
 	esci solo al reboot

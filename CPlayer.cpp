@@ -26,7 +26,7 @@ string CPlayer::receive()
 		// Normalmente il catch cattura una eccezione, ma qui sembra che sia più flessibile
 		// Se arrivo qui vuol dire che, per qualche motivo c'è stato un problema di connessione
 		// quindi, disconnetto!
-		Owner->onDisconnect(this);
+		Owner->onConnectionError(this, sr);
 		Connection->disconnect();
 		return "";
 	}
