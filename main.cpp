@@ -12,6 +12,7 @@
 
 int main()
 {
-	CMudHandler handler();
+	CMudHandler handler=CMudHandler("Nebbie.ini");
+	handler.run();
 }
 

@@ -44,16 +44,22 @@ public:
 
 
 /*
+
+* Forward declaration di un po' di classi; Purtroppo in questo momento è necessario averle
+* perché le classi fanno riferimento le une alle altre; dopo vedo se esistono soluzioni più
+* eleganti
+*/
+class CEquipment;
+class CCharacter;
+class CRoom;
+class CPlayer;
+
+/*
 * semplice classe che [dovrebbe] fa[re] una sola cosa: verificare se l'oggetto è il target
 * di un'azione, ovvero se le sue keywords sono compatibili con quelle richieste
 *
 * Devo ancora pensare come sviluppare bene il concetto, quindi non odiarmi :p
 */
-
-class CEquipment;
-class CCharacter;
-class CRoom;
-
 class CTargettable {
 protected:
     string Keywords;

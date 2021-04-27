@@ -1,9 +1,13 @@
 #pragma once
 #include <thread>
+#include <string>
 #include "Abstracts.h"
 #include "CRoom.h"
 #include "CEquipment.h"
 #include "CCharacter.h"
+
+#include "CPlayer.h"
+#include "Networking.h"
 
 using namespace std;
 
@@ -25,9 +29,25 @@ using namespace std;
 * 
 */
 
-class CMudHandler : public thread {
-	
-	CMudHandler();
-	~CMudHandler();
 
+/*
+* public CConnectionHandler
+* Uno dei modi in cui si possono gestire gli eventi è creare classi puramente virtuali con i metodi
+* da chiamare (handlers o listeners) ed far ereditare queste classi agli attuali oggetti che
+* gestiranno gli eventi (in questo caso CMudHandler gestisce gli eventi di connessione)
+*/
+
+class CMudHandler : public CConnectionHandler {
+protected:
+	list<CPlayer*> ConnectedPlayers;
+public:
+	CMudHandler(string configFile);
+	~CMudHandler();
+	
+	virtual void onDisconnect(CPlayer *connection);
+
+	int run();
+
+	// Ereditato tramite CConnectionHandler
+	virtual void onConnectionError(CPlayer* connection, SocketResult result) override;
 };

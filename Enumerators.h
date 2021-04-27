@@ -1,5 +1,18 @@
 #pragma once
 
+
+enum class ConnectionState {
+    CONN_CONNECTING,       // primo stato, quando invia la schermata iniziale e chiede lo UserID
+    CONN_VERIFY,        // secondo stato, quando richiede la password
+
+    DISCONNECTING,      // Quando si sta disconnettendo
+    
+    MNU_MAIN,           // Menu principale, quello con la scelta di entrare in gioco, cambiare PG e così via
+    
+    MNU_CREATION_XXX    // Vari stati di creazione del PG, scegli tu cosa metterci
+
+};
+
 /*
 *
 * Questo enumeratore ti serve per categorizzare gli oggetti, di modo da poter sapere
