@@ -16,11 +16,6 @@ CMudHandler::~CMudHandler() {
 	}
 }
 
-/*
-* Quando ricevi l'evento Disconnect, rimuovi la connessione dalla lista delle connessioni attive
-*
-*/
-
 
 int CMudHandler::run() {
 	/* to do... gestisce il thread principale dell'applicazione. In questo caso si 
@@ -41,15 +36,20 @@ int CMudHandler::run() {
 	return 0;
 }
 
+void CMudHandler::onConnectionError(CPlayer* connection, SocketResult result)
+{
+}
+
+/*
+* Quando ricevi l'evento Disconnect, rimuovi la connessione dalla lista delle connessioni attive
+*
+*/
+
 void CMudHandler::onDisconnect(CPlayer* connection)
 {
 	ConnectedPlayers.remove(connection);
 	// Non sono sicuro che questo delete sia necessario, sarebbe da fare qualche test
 	delete connection;
-}
-
-void CMudHandler::onConnectionError(CPlayer* connection, SocketResult result)
-{
 }
 
 

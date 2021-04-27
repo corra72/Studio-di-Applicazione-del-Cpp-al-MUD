@@ -44,9 +44,11 @@ public:
 	CMudHandler(string configFile);
 	~CMudHandler();
 	
-	virtual void onDisconnect(CPlayer *connection);
 
 	int run();
+
+	// Ereditato tramite CConnectionHandler
+	virtual void onDisconnect(CPlayer* connection);
 
 	// Ereditato tramite CConnectionHandler
 	virtual void onConnectionError(CPlayer* connection, SocketResult result) override;
