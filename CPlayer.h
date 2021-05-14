@@ -1,12 +1,10 @@
 #pragma once
 #include <string>
-#include <thread>
-#include "CCharacter.h"
 #include "Abstracts.h"
 #include "Enumerators.h"
 #include "Networking.h"
 #include "EventHandlers.h"
-#include "CMudHandler.h"
+#include "CCharacter.h"
 
 /*
 * La classe CPlayer è l'interfaccia fra il giocatore ed il MUD. Tutta la parte che riguarda
@@ -22,18 +20,18 @@ using namespace std;
 
 class CPlayer {
 private: 
-    CSocket *Connection;
-    ConnectionState State;
+    IConnectionHandler* Owner = NULL;
 
+    CSocket* Connection = NULL;
+    ConnectionState State = ConnectionState::CONN_CONNECTING;
 
 public:
 
-    CConnectionHandler *Owner;
 
     string userID; // nome di login
     CCharacter* currentCharacter;
 
-    CPlayer(CSocket *clientSocket, CConnectionHandler *owner);
+    CPlayer(CSocket* clientSocket, IConnectionHandler* owner);
 
     // Letteralmente ti dice in quale stato di gioco ti trovi in questo momento
     ConnectionState getState();
@@ -45,6 +43,9 @@ public:
 
     SocketResult disconnect()
     {
+        Connection->disconnect();
+        bool handled = false;
+        Owner->onDisconnect(this, handled);
         return SocketResult::R_DISCONNECTED;
     }
 };

@@ -1,7 +1,7 @@
 #include "CPlayer.h"
 
 
-CPlayer::CPlayer(CSocket *clientSocket, CConnectionHandler *owner) :
+CPlayer::CPlayer(CSocket *clientSocket, IConnectionHandler* owner) :
 	Connection{clientSocket},
 	Owner(owner)
 {
@@ -26,7 +26,11 @@ string CPlayer::receive()
 		// Normalmente il catch cattura una eccezione, ma qui sembra che sia più flessibile
 		// Se arrivo qui vuol dire che, per qualche motivo c'è stato un problema di connessione
 		// quindi, disconnetto!
-		Owner->onConnectionError(this, sr);
+		bool handled = false;
+		// Qui mi aspetto che la connessione (quindi la classe CPlayer) venga rimossa dalla lista
+		Owner->onConnectionError(this, sr, handled);
+		// Come dicevo gli oggetti devono gestirsi da soli, quindi è compito di CPlayer quello di
+		// chiudere la connessione ed eventualmente inviare un messaggio di errore.
 		Connection->disconnect();
 		return "";
 	}

@@ -2,12 +2,12 @@
 #include <thread>
 #include <string>
 #include "Abstracts.h"
+#include "Networking.h"
+#include "EventHandlers.h"
 #include "CRoom.h"
 #include "CEquipment.h"
 #include "CCharacter.h"
-
 #include "CPlayer.h"
-#include "Networking.h"
 
 using namespace std;
 
@@ -37,7 +37,7 @@ using namespace std;
 * gestiranno gli eventi (in questo caso CMudHandler gestisce gli eventi di connessione)
 */
 
-class CMudHandler : public CConnectionHandler {
+class CMudHandler : public IConnectionHandler {
 protected:
 	list<CPlayer*> ConnectedPlayers;
 public:
@@ -47,9 +47,7 @@ public:
 
 	int run();
 
-	// Ereditato tramite CConnectionHandler
-	virtual void onConnectionError(CPlayer* connection, SocketResult result) override;
-
-	// Ereditato tramite CConnectionHandler
-	virtual void onDisconnect(CPlayer* connection) override;
+	// Ereditato tramite IConnectionHandler
+	virtual void onDisconnect(CPlayer* connection, bool& handled) override;
+	virtual void onConnectionError(CPlayer* connection, SocketResult result, bool& handled) override;
 };

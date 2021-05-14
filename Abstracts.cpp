@@ -5,6 +5,7 @@
 #include "Abstracts.h"
 #include "CEquipment.h"
 
+
 using namespace std;
 
 CTargettable::CTargettable(string keywords) {
@@ -14,15 +15,8 @@ CTargettable::CTargettable(string keywords) {
         Keywords = keywords;
 }
 
-bool CTargettable::isTarget(std::vector<string> &keywords) {
-    for (string s : keywords) {
-        // No, non è chiaro, ma, praticamente, questo si può tradurre
-        // nell'equivalente unsigned di Keywords.find(s) == -1;
-        // -1 unsigned è il massimo possibile valore per la variabile
-        if (Keywords.find(s) == std::string::npos)
-            return false;
-    }
-    return true;
+bool CTargettable::isTarget(CQuery& reqKeywords) {
+    return reqKeywords.test(Keywords, false);
 }
 
 
@@ -30,8 +24,9 @@ CTargettable::~CTargettable() {
 }
 
 
-list<CEquipment*>::iterator CInventoryObject::find(std::vector<string>& keywords) {
-    for (list<CEquipment*>::iterator iter = Inventory.begin(); iter != Inventory.end(); ++iter) {
+list<CTargettable*>::iterator CInventoryObject::find(CQuery& keywords) {
+    
+    for (list<CTargettable*>::iterator iter = this->Inventory.begin(); iter != Inventory.end(); ++iter) {
         if ((*iter)->isTarget(keywords)) {
             return iter;
         }
@@ -39,22 +34,43 @@ list<CEquipment*>::iterator CInventoryObject::find(std::vector<string>& keywords
     return Inventory.end();
 }
 
-CEquipment* CInventoryObject::moveFromList(CInventoryObject &source, list<CEquipment*>::iterator &itemIter) {
-    Inventory.splice(Inventory.begin(), source.Inventory, itemIter);
-    return *itemIter;
-}
-
-CEquipment* CInventoryObject::moveToList(CInventoryObject& destination, list<CEquipment*>::iterator &itemIter)
+list<CTargettable*>::iterator CInventoryObject::findNext(list<CTargettable*>::iterator iter, CQuery& keywords)
 {
-    Inventory.splice(destination.Inventory.begin(), Inventory, itemIter);
-    return *itemIter;
+    for (; iter != Inventory.end(); ++iter) {
+        if ((*iter)->isTarget(keywords)) {
+            return iter;
+        }
+    }
+    return Inventory.end();
 }
 
-CInventoryObject::~CInventoryObject()
+CTargettable* CInventoryObject::get(list<CTargettable*>::iterator &itemIter) {
+    if (itemIter != Inventory.end()) {
+        // DA TESTARE; in teoria sposta l'iteratore al prossimo elemento della lista
+        // prima di rimuovere l'elemento corrente; in teoria l'iteraotre all'esterno
+        // dovrebbe essere ancora valido e puntare al nuovo elemento, invece che puntare
+        // ad un elemento fantasma; da verificare se erase ha chiamato il distruttore
+        // di curr!
+        list<CTargettable*>::iterator curr = itemIter;
+        itemIter++;
+        CTargettable* result = *curr;
+        Inventory.erase(curr);
+        return result;
+    }
+    return NULL;
+}
+
+void CInventoryObject::put(CTargettable* item)
+{
+    if(item!=NULL)
+        Inventory.push_back(item);
+}
+
+CInventoryObject::~CInventoryObject() 
 {
     // Vuotiamo la lista nel distruttore.
     while (!Inventory.empty()) {
-        CEquipment* item = Inventory.front();
+        CTargettable *item = Inventory.front();
         Inventory.pop_front();
         delete item;
     }
