@@ -1,5 +1,5 @@
 #pragma once
-#include "Structs.h"
+#include "structs.h"
 #include "Enumerators.h"
 #include "Networking.h"
 #include "CPlayer.h"
