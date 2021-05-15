@@ -1,6 +1,6 @@
 
 #include <string>
-#include "CMudHandler.h"
+#include "CMudHandler.hpp"
 
 CMudHandler::CMudHandler(string configFile)
 {

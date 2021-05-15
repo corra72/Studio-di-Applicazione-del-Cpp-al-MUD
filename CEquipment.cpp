@@ -1,4 +1,4 @@
-#include "CEquipment.h"
+#include "CEquipment.hpp"
 
 int CEquipment::save(ostream& out)
 {

@@ -1,5 +1,5 @@
 #pragma once
-#include "Enumerators.h"
+#include "Enumerators.hpp"
 
 /*
 * Se non hai bisogno di classi, puoi comunque continuare ad usare le stutture

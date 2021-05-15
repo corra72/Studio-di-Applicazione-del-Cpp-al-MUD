@@ -1,13 +1,13 @@
 #pragma once
 #include <thread>
 #include <string>
-#include "Abstracts.h"
-#include "Networking.h"
-#include "EventHandlers.h"
-#include "CRoom.h"
-#include "CEquipment.h"
-#include "CCharacter.h"
-#include "CPlayer.h"
+#include "Abstracts.hpp"
+#include "Networking.hpp"
+#include "EventHandlers.hpp"
+#include "CRoom.hpp"
+#include "CEquipment.hpp"
+#include "CCharacter.hpp"
+#include "CPlayer.hpp"
 
 using namespace std;
 

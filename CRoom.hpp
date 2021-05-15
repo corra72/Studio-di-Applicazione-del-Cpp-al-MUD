@@ -1,5 +1,5 @@
 #pragma once
-#include "Abstracts.h"
+#include "Abstracts.hpp"
 
 /*
 * L'oggetto CRoom è il primo definito; contiene tutti i dati che ti servono per gestire

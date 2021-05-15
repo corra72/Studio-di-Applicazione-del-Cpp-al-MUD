@@ -1,11 +1,12 @@
-#include "CPlayer.h"
-
+#include <fstream>
+#include "CPlayer.hpp"
 
 CPlayer::CPlayer(CSocket *clientSocket, IConnectionHandler* owner) :
 	Connection{clientSocket},
 	Owner(owner)
 {
 	State = ConnectionState::CONN_CONNECTING;
+	currentCharacter = NULL;
 }
 
 ConnectionState CPlayer::getState()
@@ -35,5 +36,45 @@ string CPlayer::receive()
 		return "";
 	}
 	// TODO: inserire l'istruzione return qui
+}
+
+int CPlayer::save()
+{
+	if (currentCharacter != NULL) {
+		// currentCharacter->ShortDesc contiene il nome del file
+		fstream myFile("data.bin", ios::out | ios::binary);
+		myFile.write((char*)&PC_HEADER, sizeof(PC_HEADER));
+		myFile.write((char*)&PC_VER, sizeof(PC_VER));
+		// Qui ci metti il codice per salvare effettivamente i dati
+		myFile.close();
+	}
+	return 0;
+}
+
+int CPlayer::load()
+{
+	UINT32 tempInt=-1;
+
+	fstream myFile("data.bin", ios::in | ios::out | ios::binary);
+	myFile.read((char*)&tempInt, sizeof(tempInt));
+	if (tempInt == PC_HEADER) {
+		// se siamo qui sappiamo che è un file del tipo corretto
+		myFile.read((char*)&tempInt, sizeof(tempInt));
+		switch (tempInt) {
+		case PC_VER:
+			// qui metti la procedura per leggere la versione corrente del file
+			break;
+		default:
+			cout << "Unknown file version: " << tempInt;
+		}
+
+	
+	}
+	else 
+	{
+		cout << "Illegal file type";
+	}
+
+	return 0;
 }
 
