@@ -67,7 +67,7 @@ int CPlayer::save()
 
 int CPlayer::load(const char *fileName)
 {
-	UINT32 tempInt=-1;
+	uint32_t tempInt=-1;
 
 	fstream myFile(fileName, ios::in | ios::out | ios::binary);
 	myFile.read((char*)&tempInt, sizeof(tempInt));
