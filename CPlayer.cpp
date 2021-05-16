@@ -53,7 +53,7 @@ int CPlayer::save()
 
 int CPlayer::load()
 {
-	UINT32 tempInt=-1;
+	uint32_t tempInt=-1;
 
 	fstream myFile("data.bin", ios::in | ios::out | ios::binary);
 	myFile.read((char*)&tempInt, sizeof(tempInt));
