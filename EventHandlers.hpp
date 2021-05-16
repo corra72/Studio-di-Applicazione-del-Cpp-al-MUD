@@ -1,8 +1,8 @@
 #pragma once
-#include "Structs.h"
-#include "Enumerators.h"
-#include "Networking.h"
-#include "CPlayer.h"
+#include "structs.h"
+#include "Enumerators.hpp"
+#include "Networking.hpp"
+#include "Abstracts.hpp"
 
 /*
 * nota tecnica: le classi puramente virtuali in altri linguaggi sono chiamate "interfacce"; in
@@ -28,7 +28,7 @@
 *    questo interrompe la catena (non credo che lo userai, ma è sempre meglio avercelo).
 */
 class IDestroyableHandler {
-	virtual void onReceiveDamage(CDestroyable *caller, CMUDObject *source, bool& handled) = 0;
+	virtual void onReceiveDamage(CDestroyable* caller, CMUDObject* source, bool& handled) = 0;
 	virtual void onDestroyed(CDestroyable* caller, bool& handled) = 0;
 };
 

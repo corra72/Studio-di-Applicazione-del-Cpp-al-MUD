@@ -4,8 +4,8 @@
 #include <list>
 #include <vector>
 #include "structs.h"
-#include "Enumerators.h"
-#include "CQuery.h"
+#include "Enumerators.hpp"
+#include "CQuery.hpp"
 
 using namespace std;
 

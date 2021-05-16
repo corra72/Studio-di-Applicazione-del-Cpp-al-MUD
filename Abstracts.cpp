@@ -2,8 +2,8 @@
 #include <iterator>
 #include <string>
 #include <vector>
-#include "Abstracts.h"
-#include "CEquipment.h"
+#include "Abstracts.hpp"
+#include "CEquipment.hpp"
 
 
 using namespace std;

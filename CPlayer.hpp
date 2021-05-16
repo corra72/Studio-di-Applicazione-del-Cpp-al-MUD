@@ -1,10 +1,11 @@
 #pragma once
 #include <string>
-#include "Abstracts.h"
-#include "Enumerators.h"
-#include "Networking.h"
-#include "EventHandlers.h"
-#include "CCharacter.h"
+#include "const.h";
+#include "Abstracts.hpp"
+#include "Enumerators.hpp"
+#include "Networking.hpp"
+#include "EventHandlers.hpp"
+#include "CCharacter.hpp"
 
 /*
 * La classe CPlayer è l'interfaccia fra il giocatore ed il MUD. Tutta la parte che riguarda
@@ -34,12 +35,15 @@ public:
     CPlayer(CSocket* clientSocket, IConnectionHandler* owner);
 
     // Letteralmente ti dice in quale stato di gioco ti trovi in questo momento
-    ConnectionState getState();
+    virtual ConnectionState getState();
 
     // Invia un messaggio sul socket; questo messaggio dovrebbe arrivare al player
-    SocketResult sendMessage(string &message);
+    virtual SocketResult sendMessage(string &message);
 
-    string receive();
+    virtual string receive();
+
+    virtual int save();
+    virtual int load();
 
     SocketResult disconnect()
     {
