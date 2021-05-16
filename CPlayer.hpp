@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include "const.h";
+#include "const.h"
 #include "Abstracts.hpp"
 #include "Enumerators.hpp"
 #include "Networking.hpp"
@@ -21,9 +21,9 @@ using namespace std;
 
 class CPlayer {
 private: 
-    IConnectionHandler* Owner = NULL;
+    IConnectionHandler *Owner;
 
-    CSocket* Connection = NULL;
+    CSocket *Connection;
     ConnectionState State = ConnectionState::CONN_CONNECTING;
 
 public:
@@ -32,7 +32,8 @@ public:
     string userID; // nome di login
     CCharacter* currentCharacter;
 
-    CPlayer(CSocket* clientSocket, IConnectionHandler* owner);
+    CPlayer(CSocket *clientSocket, IConnectionHandler *owner);
+    virtual ~CPlayer();
 
     // Letteralmente ti dice in quale stato di gioco ti trovi in questo momento
     virtual ConnectionState getState();
@@ -43,14 +44,9 @@ public:
     virtual string receive();
 
     virtual int save();
-    virtual int load();
+    virtual int load(const char *fileName);
 
-    SocketResult disconnect()
-    {
-        Connection->disconnect();
-        bool handled = false;
-        Owner->onDisconnect(this, handled);
-        return SocketResult::R_DISCONNECTED;
-    }
+    SocketResult disconnect();
+
 };
 

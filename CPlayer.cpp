@@ -1,12 +1,18 @@
 #include <fstream>
 #include "CPlayer.hpp"
 
-CPlayer::CPlayer(CSocket *clientSocket, IConnectionHandler* owner) :
+CPlayer::CPlayer(CSocket *clientSocket, IConnectionHandler *owner) :
 	Connection{clientSocket},
 	Owner(owner)
 {
 	State = ConnectionState::CONN_CONNECTING;
 	currentCharacter = NULL;
+}
+
+CPlayer::~CPlayer()
+{
+	if (Connection != NULL)
+		delete Connection;
 }
 
 ConnectionState CPlayer::getState()
@@ -38,24 +44,32 @@ string CPlayer::receive()
 	// TODO: inserire l'istruzione return qui
 }
 
+SocketResult CPlayer::disconnect()
+{
+	Connection->disconnect();
+	bool handled = false;
+	Owner->onDisconnect(this, handled);
+	return SocketResult::R_DISCONNECTED;
+}
+
 int CPlayer::save()
 {
-	if (currentCharacter != NULL) {
+	//if (currentCharacter != NULL) {
 		// currentCharacter->ShortDesc contiene il nome del file
-		fstream myFile("data.bin", ios::out | ios::binary);
+		fstream myFile("Data.bin", ios::out | ios::binary);
 		myFile.write((char*)&PC_HEADER, sizeof(PC_HEADER));
 		myFile.write((char*)&PC_VER, sizeof(PC_VER));
 		// Qui ci metti il codice per salvare effettivamente i dati
 		myFile.close();
-	}
+	//}
 	return 0;
 }
 
-int CPlayer::load()
+int CPlayer::load(const char *fileName)
 {
 	UINT32 tempInt=-1;
 
-	fstream myFile("data.bin", ios::in | ios::out | ios::binary);
+	fstream myFile(fileName, ios::in | ios::out | ios::binary);
 	myFile.read((char*)&tempInt, sizeof(tempInt));
 	if (tempInt == PC_HEADER) {
 		// se siamo qui sappiamo che è un file del tipo corretto
