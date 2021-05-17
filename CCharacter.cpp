@@ -10,7 +10,6 @@ CCharacter::CCharacter(char_file_u* PCdata) :
 {
 	if(PCdata==NULL)
 		throw "Invalid null pointer in CCharacter creation!";
-
 }
 
 CCharacter::~CCharacter()

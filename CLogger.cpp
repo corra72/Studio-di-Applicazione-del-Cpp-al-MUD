@@ -31,8 +31,10 @@ void CLogger::log(ESeverity severity, std::string className, std::string methodN
 	auto start = std::chrono::system_clock::now();
 	// Qui ci va la procedura per salvare il log su disco
 
+
+
 	if (severity >= Level) {
-		
+		InternalStream.write(message.c_str(),message.length());
 	}
 
 }
