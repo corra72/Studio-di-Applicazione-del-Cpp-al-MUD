@@ -43,8 +43,8 @@ public:
 
     virtual string receive();
 
-    virtual int save();
-    virtual int load(const char *fileName);
+    virtual IOOperationResult save();
+    virtual IOOperationResult load(const char *fileName);
 
     SocketResult disconnect();
 

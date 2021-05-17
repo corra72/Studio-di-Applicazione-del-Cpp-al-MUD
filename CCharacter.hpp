@@ -1,36 +1,28 @@
 #pragma once
+#include "structs.h"
 #include "Abstracts.hpp"
 
 class CCharacter : public CDestroyable {
+private:
+    struct char_file_u *saveData = NULL;
 
 public:
 
-    CCharacter(int vNum, string desc, string keywords, int hp) :
-        CDestroyable{ vNum, MudObjectType::MOBILE, desc, keywords, hp }
-    {
+    CCharacter(int vNum, string desc, string keywords, int hp);
 
-    }
+    CCharacter(char_file_u *PCdata);
 
-    virtual int save(ostream& out) {
-        return -1;
-    };
+    virtual int save(ostream& out);;
 
-    virtual int load(istream& in) {
-        return -1;
-    };
+    virtual int load(istream& in);;
 
-    virtual MudDestroyableState receiveDamage(CDestroyable& source, Damage& dam) {
-        // do something
-        State = MudDestroyableState::FINE;
-        return State;
-    }
+    struct char_file_u* prepareForSave();
 
-    virtual MudDestroyableState repairDamage(CDestroyable& source, Damage& dam) {
-        // do something
+    virtual MudDestroyableState receiveDamage(CDestroyable& source, Damage& dam);
 
-        State = MudDestroyableState::FINE;
-        return State;
-    }
+    virtual MudDestroyableState repairDamage(CDestroyable& source, Damage& dam);
+
+    ~CCharacter();
 
 };
 
