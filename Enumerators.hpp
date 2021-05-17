@@ -1,5 +1,20 @@
 #pragma once
 
+enum class IOOperationResult {
+    // operation succeded
+    SUCCEEDED,
+    // operation failed for unknown reasons
+    F_UNKNOWN,
+    // file not present
+    F_FILENOTFOUND,
+    // header not found
+    F_ILLEGALFILETYPE,
+    // Version is unknown, I don't know hot to convert data
+    F_UNKNOWVERSION,
+    // file had not the required bytes, read terminated abruptly
+    F_CORRUPTEDFILE
+};
+
 
 enum class ConnectionState {
     CONN_CONNECTING,       // primo stato, quando invia la schermata iniziale e chiede lo UserID
